@@ -1,0 +1,10 @@
+.figure {
+	display: block;
+	height: 14rem;
+	width: 12rem;
+	fill: transparent;
+	stroke: #ffffff;
+	stroke-width: 0.25rem;
+	stroke-linecap: round;
+	flex-shrink: 0;
+}
