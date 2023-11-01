@@ -8,8 +8,8 @@ interface IAppExports {
 	hintCount: number;
 	value: IHangmanValue;
 	bodyPart: IHangmanBodyPart;
-	isStarted: boolean;
 	isLoading: boolean;
+	isStarted: boolean;
 	isEnded: boolean;
 	onClickStart: () => void;
 	onClickReplay: () => void;
@@ -36,8 +36,8 @@ export const useApp = (): IAppExports => {
 	const [value, setValue] = useState<IHangmanValue>(defaultHangmanValue);
 	const [bodyPart, setBodyPart] = useState<IHangmanBodyPart>(defaultHangmanBodyPart);
 
-	const [isStarted, setIsStarted] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isStarted, setIsStarted] = useState<boolean>(false);
 	const [isPressed, setIsPressed] = useState<boolean>(false);
 	const [isEnded, setIsEnded] = useState<boolean>(false);
 
@@ -155,5 +155,5 @@ export const useApp = (): IAppExports => {
 		}
 	}, [finishGame, isEnded, isFinished]);
 
-	return { word, chars, hintCount, value, bodyPart, isStarted, isLoading, isEnded, onClickStart, onClickReplay, onClickHint, onClickSolve };
+	return { word, chars, hintCount, value, bodyPart, isLoading, isStarted, isEnded, onClickStart, onClickReplay, onClickHint, onClickSolve };
 };

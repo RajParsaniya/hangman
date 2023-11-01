@@ -34,18 +34,6 @@ export const ValueContainer = (props: IValueContainerProps) => {
 					</Text>
 				</Center>
 				<Spacer {...spacerTagStyle(props.value.body)} />
-				<Center w="16%" h="full" {...centerTagStyle(props.value.leftArm)}>
-					<Text w="full" h="fit-content" variant="value">
-						{props.value.leftArm !== undefined && props.value.leftArm}
-					</Text>
-				</Center>
-				<Spacer {...spacerTagStyle(props.value.leftArm)} />
-				<Center w="16%" h="full" {...centerTagStyle(props.value.rightArm)}>
-					<Text w="full" h="fit-content" variant="value">
-						{props.value.rightArm !== undefined && props.value.rightArm}
-					</Text>
-				</Center>
-				<Spacer {...spacerTagStyle(props.value.rightArm)} />
 				<Center w="16%" h="full" {...centerTagStyle(props.value.leftLeg)}>
 					<Text w="full" h="fit-content" variant="value">
 						{props.value.leftLeg !== undefined && props.value.leftLeg}
@@ -55,6 +43,18 @@ export const ValueContainer = (props: IValueContainerProps) => {
 				<Center w="16%" h="full" {...centerTagStyle(props.value.rightLeg)}>
 					<Text w="full" h="fit-content" variant="value">
 						{props.value.rightLeg !== undefined && props.value.rightLeg}
+					</Text>
+				</Center>
+				<Spacer {...spacerTagStyle(props.value.rightLeg)} />
+				<Center w="16%" h="full" {...centerTagStyle(props.value.leftArm)}>
+					<Text w="full" h="fit-content" variant="value">
+						{props.value.leftArm !== undefined && props.value.leftArm}
+					</Text>
+				</Center>
+				<Spacer {...spacerTagStyle(props.value.leftArm)} />
+				<Center w="16%" h="full" {...centerTagStyle(props.value.rightArm)}>
+					<Text w="full" h="fit-content" variant="value">
+						{props.value.rightArm !== undefined && props.value.rightArm}
 					</Text>
 				</Center>
 			</HStack>
