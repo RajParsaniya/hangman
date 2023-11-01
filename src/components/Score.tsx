@@ -11,16 +11,16 @@ interface IScoreProps {
 
 export const Score = (props: IScoreProps) => {
 	const [score, setScore] = useState<number>(0);
-	const { getProgress } = useGameUtils();
+	const { isWordGuessed, getProgress } = useGameUtils();
 	const progress = useMemo(() => Math.floor(getProgress(props.word, props.chars)), [getProgress, props.chars, props.word]);
 
 	useEffect(() => {
-		if (!props.isEnded && score !== progress) {
+		if ((!props.isEnded || isWordGuessed(props.word, props.chars)) && score !== progress) {
 			setTimeout(() => {
 				setScore((current) => current + 1);
 			}, 10);
 		}
-	}, [score, progress, props.isEnded]);
+	}, [isWordGuessed, progress, props.chars, props.isEnded, props.word, score]);
 
 	return (
 		<Box w="full" h="full" sx={props.sx}>
