@@ -5,22 +5,23 @@ import { useGameUtils } from "../hooks";
 interface IScoreProps {
 	word: string;
 	chars: Array<string>;
-	isEnded: boolean;
+	isSolved: boolean;
 	sx?: object;
 }
 
 export const Score = (props: IScoreProps) => {
 	const [score, setScore] = useState<number>(0);
-	const { isWordGuessed, getProgress } = useGameUtils();
-	const progress = useMemo(() => Math.floor(getProgress(props.word, props.chars)), [getProgress, props.chars, props.word]);
+	const { getProgress } = useGameUtils();
+
+	const progress = useMemo(() => {
+		return Math.floor(getProgress(props.word, props.chars));
+	}, [getProgress, props.chars, props.word]);
 
 	useEffect(() => {
-		if ((!props.isEnded || isWordGuessed(props.word, props.chars)) && score !== progress) {
-			setTimeout(() => {
-				setScore((current) => current + 1);
-			}, 10);
+		if (!props.isSolved && score !== progress) {
+			setScore(progress);
 		}
-	}, [isWordGuessed, progress, props.chars, props.isEnded, props.word, score]);
+	}, [progress, props.isSolved, score]);
 
 	return (
 		<Box w="full" h="full" sx={props.sx}>

@@ -4,7 +4,8 @@ import { FOOTER_TEXT, TITLE_TEXT } from "../constants";
 import { useApp } from "../hooks";
 
 export const App = () => {
-	const { word, chars, value, bodyPart, hintCount, isLoading, isStarted, isEnded, onClickStart, onClickReplay, onClickHint, onClickSolve } = useApp();
+	const { word, chars, value, bodyPart, hintCount, isLoading, isStarted, isSolved, isEnded, onClickStart, onClickReplay, onClickHint, onClickSolve } =
+		useApp();
 
 	return (
 		<Center w="full" minW="100vw" h="full" minH="100vh">
@@ -24,6 +25,7 @@ export const App = () => {
 							hintCount={hintCount}
 							isLoading={isLoading}
 							isStarted={isStarted}
+							isSolved={isSolved}
 							isEnded={isEnded}
 							onClickStart={onClickStart}
 							onClickReplay={onClickReplay}

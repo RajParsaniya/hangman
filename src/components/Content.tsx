@@ -11,6 +11,7 @@ interface IContentProps {
 	hintCount: number;
 	isLoading: boolean;
 	isStarted: boolean;
+	isSolved: boolean;
 	isEnded: boolean;
 	onClickStart: () => void;
 	onClickReplay: () => void;
@@ -72,7 +73,7 @@ export const Content = (props: IContentProps) => {
 										</Box>
 									</HStack>
 									<HStack w="full" h={8} overflow="hidden" spacing={0}>
-										<Score word={props.word} chars={props.chars} isEnded={props.isEnded} sx={{ w: "66%", h: "full" }} />
+										<Score word={props.word} chars={props.chars} isSolved={props.isSolved} sx={{ w: "66%", h: "full" }} />
 										<Spacer />
 										<Button w="28%" h="full" variant="primary" onClick={props.onClickReplay}>
 											{REPLAY_BUTTON_TEXT}

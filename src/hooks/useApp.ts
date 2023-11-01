@@ -10,6 +10,7 @@ interface IAppExports {
 	bodyPart: IHangmanBodyPart;
 	isLoading: boolean;
 	isStarted: boolean;
+	isSolved: boolean;
 	isEnded: boolean;
 	onClickStart: () => void;
 	onClickReplay: () => void;
@@ -39,6 +40,7 @@ export const useApp = (): IAppExports => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isStarted, setIsStarted] = useState<boolean>(false);
 	const [isPressed, setIsPressed] = useState<boolean>(false);
+	const [isSolved, setIsSolved] = useState<boolean>(false);
 	const [isEnded, setIsEnded] = useState<boolean>(false);
 
 	const { toast } = useToast();
@@ -113,6 +115,7 @@ export const useApp = (): IAppExports => {
 
 	const onClickReplay = (): void => {
 		setIsStarted(false);
+		setIsSolved(false);
 		setIsEnded(false);
 		resetGame();
 	};
@@ -127,6 +130,7 @@ export const useApp = (): IAppExports => {
 
 	const onClickSolve = (): void => {
 		if (word !== undefined) {
+			setIsSolved(true);
 			setChars(splitWord(word));
 		}
 	};
@@ -155,5 +159,5 @@ export const useApp = (): IAppExports => {
 		}
 	}, [finishGame, isEnded, isFinished]);
 
-	return { word, chars, hintCount, value, bodyPart, isLoading, isStarted, isEnded, onClickStart, onClickReplay, onClickHint, onClickSolve };
+	return { word, chars, hintCount, value, bodyPart, isLoading, isStarted, isSolved, isEnded, onClickStart, onClickReplay, onClickHint, onClickSolve };
 };
