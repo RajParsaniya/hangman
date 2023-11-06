@@ -9,9 +9,9 @@ export const colors = {
 			secondary: {
 				default: "#FFFFFF",
 			},
-			value: {
-				default: "#F56565"
-			}
+			hangman: {
+				value: "#F56565",
+			},
 		},
 	},
 };

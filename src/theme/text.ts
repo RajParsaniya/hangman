@@ -26,8 +26,8 @@ export const textStyle = {
 				},
 				score: {
 					fontSize: "sm",
-					color: "brand.secondary.default"
-				}
+					color: "brand.secondary.default",
+				},
 			},
 		},
 	},

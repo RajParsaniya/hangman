@@ -13,3 +13,4 @@ export const WON_TOAST_LABEL: string = "You won the game";
 export const LOSE_TOAST_LABEL: string = "You lose the game";
 
 export const RANDOM_WORD_API: string = "https://random-word-api.herokuapp.com/all";
+export const GITHUB_URL: string = "https://github.com/RajParsaniya";

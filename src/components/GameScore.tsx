@@ -2,14 +2,14 @@ import { Box, HStack, Progress } from "@chakra-ui/react";
 import { useEffect, useMemo, useState } from "react";
 import { useGameUtils } from "../hooks";
 
-interface IScoreProps {
+interface IGameScoreProps {
 	word: string;
 	chars: Array<string>;
 	isSolved: boolean;
 	sx?: object;
 }
 
-export const Score = (props: IScoreProps) => {
+export const GameScore = (props: IGameScoreProps) => {
 	const [score, setScore] = useState<number>(0);
 	const { getProgress } = useGameUtils();
 

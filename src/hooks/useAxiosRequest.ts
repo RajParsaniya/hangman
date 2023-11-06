@@ -37,7 +37,7 @@ export const useAxiosRequest = <ResponseType>(props: IAxiosRequestProps<Response
 		}
 	}, [axoisConfig, props, reload]);
 
-	const forceReload = useCallback(() => {
+	const forceReload = useCallback((): void => {
 		setReload(true);
 	}, []);
 

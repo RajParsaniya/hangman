@@ -6,3 +6,4 @@ export * from "./useFetchWords";
 export * from "./useGameUtils";
 export * from "./useKeyBinding";
 export * from "./useToast";
+export * from "./useToastOptions";

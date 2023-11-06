@@ -1,14 +1,14 @@
 import { Box, Button, Center, HStack, Spacer, Spinner, VStack } from "@chakra-ui/react";
-import { Game, Score, ValueContainer } from ".";
+import { Game, GameScore, HangmanValues } from ".";
 import { HINT_BUTTON_TEXT, REPLAY_BUTTON_TEXT, SOLVE_BUTTON_TEXT, START_BUTTON_TEXT } from "../constants";
 import { useGameUtils } from "../hooks";
-import { IHangmanValue } from "../interfaces";
+import { HangmanValue } from "../type";
 
 interface IContentProps {
 	word: string | undefined;
 	chars: Array<string>;
-	value: IHangmanValue;
-	hintCount: number;
+	hangmanValue: HangmanValue;
+	hints: number;
 	isLoading: boolean;
 	isStarted: boolean;
 	isSolved: boolean;
@@ -42,7 +42,7 @@ export const Content = (props: IContentProps) => {
 							{props.isStarted ? (
 								<VStack w="full" h="fit-content" spacing={2}>
 									<HStack w="full" h={8} overflow="hidden" spacing={0}>
-										<ValueContainer value={props.value} sx={{ w: "66%", h: "full" }} />
+										<HangmanValues hangmanValue={props.hangmanValue} sx={{ w: "66%", h: "full" }} />
 										<Spacer />
 										<Box w="28%" h="full">
 											{props.isEnded ? (
@@ -64,7 +64,7 @@ export const Content = (props: IContentProps) => {
 													variant="primary"
 													_hover={{ opacity: 0.7 }}
 													_disabled={{ opacity: 0.7, cursor: "not-allowed" }}
-													isDisabled={props.hintCount === 0}
+													isDisabled={props.hints === 0}
 													onClick={props.onClickHint}
 												>
 													{HINT_BUTTON_TEXT}
@@ -73,7 +73,7 @@ export const Content = (props: IContentProps) => {
 										</Box>
 									</HStack>
 									<HStack w="full" h={8} overflow="hidden" spacing={0}>
-										<Score word={props.word} chars={props.chars} isSolved={props.isSolved} sx={{ w: "66%", h: "full" }} />
+										<GameScore word={props.word} chars={props.chars} isSolved={props.isSolved} sx={{ w: "66%", h: "full" }} />
 										<Spacer />
 										<Button w="28%" h="full" variant="primary" onClick={props.onClickReplay}>
 											{REPLAY_BUTTON_TEXT}

@@ -11,7 +11,7 @@ interface IAxoisConfigProps {
 
 interface IAxiosConfigExports {
 	isLoading: boolean;
-	axoisConfig: (value: IAxoisConfigProps) => Promise<unknown>;
+	axoisConfig: (response: IAxoisConfigProps) => Promise<unknown>;
 }
 
 export const useAxiosConfig = (): IAxiosConfigExports => {
