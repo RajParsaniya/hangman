@@ -1,11 +1,11 @@
 import { Box, Button, Center, HStack, Spacer, Spinner, VStack } from "@chakra-ui/react";
 import { Game, GameScore, HangmanValues } from ".";
-import { HINT_BUTTON_TEXT, REPLAY_BUTTON_TEXT, SOLVE_BUTTON_TEXT, START_BUTTON_TEXT } from "../constants";
-import { useGameUtils } from "../hooks";
+import { HINT_BUTTON, REPLAY_BUTTON, SOLVE_BUTTON, START_BUTTON } from "../constants";
+import { useCore } from "../hooks";
 import { HangmanValue } from "../type";
 
 interface IContentProps {
-	word: string | undefined;
+	word?: string;
 	chars: Array<string>;
 	hangmanValue: HangmanValue;
 	hints: number;
@@ -20,8 +20,8 @@ interface IContentProps {
 	sx?: object;
 }
 
-export const Content = (props: IContentProps) => {
-	const { isWordGuessed } = useGameUtils();
+export const Content = (props: IContentProps): JSX.Element => {
+	const { isWordGuessed } = useCore();
 
 	return (
 		<VStack w="full" h="full" spacing={0} sx={props.sx}>
@@ -55,7 +55,7 @@ export const Content = (props: IContentProps) => {
 													isDisabled={isWordGuessed(props.word, props.chars)}
 													onClick={props.onClickSolve}
 												>
-													{SOLVE_BUTTON_TEXT}
+													{SOLVE_BUTTON}
 												</Button>
 											) : (
 												<Button
@@ -67,7 +67,7 @@ export const Content = (props: IContentProps) => {
 													isDisabled={props.hints === 0}
 													onClick={props.onClickHint}
 												>
-													{HINT_BUTTON_TEXT}
+													{HINT_BUTTON}
 												</Button>
 											)}
 										</Box>
@@ -75,8 +75,8 @@ export const Content = (props: IContentProps) => {
 									<HStack w="full" h={8} overflow="hidden" spacing={0}>
 										<GameScore word={props.word} chars={props.chars} isSolved={props.isSolved} sx={{ w: "66%", h: "full" }} />
 										<Spacer />
-										<Button w="28%" h="full" variant="primary" onClick={props.onClickReplay}>
-											{REPLAY_BUTTON_TEXT}
+										<Button w="28%" h="full" variant="primary" _hover={{ opacity: 0.7 }} onClick={props.onClickReplay}>
+											{REPLAY_BUTTON}
 										</Button>
 									</HStack>
 								</VStack>
@@ -90,7 +90,7 @@ export const Content = (props: IContentProps) => {
 									isLoading={props.isLoading}
 									onClick={props.onClickStart}
 								>
-									{START_BUTTON_TEXT}
+									{START_BUTTON}
 								</Button>
 							)}
 						</Box>

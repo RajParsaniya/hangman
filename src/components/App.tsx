@@ -3,7 +3,7 @@ import { Content, Hangman } from ".";
 import { FOOTER_TEXT, GITHUB_URL, TITLE_TEXT } from "../constants";
 import { useApp } from "../hooks";
 
-export const App = () => {
+export const App = (): JSX.Element => {
 	const {
 		word,
 		chars,

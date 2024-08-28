@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAxiosConfig } from ".";
-import { Method } from "../type";
+import { EMethod } from "../enums";
 
 interface IAxiosRequestProps<ResponseType> {
-	method: Method;
+	method: EMethod;
 	endpoint: string;
 	request?: object;
 	configOverrides?: object;
@@ -20,7 +20,7 @@ export const useAxiosRequest = <ResponseType>(props: IAxiosRequestProps<Response
 	const [reload, setReload] = useState<boolean>(false);
 	const { isLoading, axoisConfig } = useAxiosConfig();
 
-	useEffect(() => {
+	useEffect((): void => {
 		if (reload) {
 			setReload(false);
 			axoisConfig({ method: props.method, endpoint: props.endpoint, request: props.request, configOverrides: props.configOverrides })

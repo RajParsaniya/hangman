@@ -1,3 +1,3 @@
-export * from "./Array";
-export * from "./Object";
-export * from "./String";
+export * from "./ArrayUtils";
+export * from "./ObjectUtils";
+export * from "./StringUtils";

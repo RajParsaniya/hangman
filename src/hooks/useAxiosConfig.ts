@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
-import { Method } from "../type";
+import { EMethod } from "../enums";
 
 interface IAxoisConfigProps {
-	method: Method;
+	method: EMethod;
 	endpoint: string;
 	request?: object;
 	configOverrides?: object;

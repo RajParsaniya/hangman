@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useDefaultValues, useFetchWords, useGameUtils, useKeyBinding, useToast, useToastOptions } from ".";
+import { useCore, useDefaultValues, useFetchWords, useKeyBinding, useToast, useToastOptions } from ".";
 import { HangmanBodyPart, HangmanValue } from "../type";
 
 interface IAppExports {
-	word: string | undefined;
+	word?: string;
 	chars: Array<string>;
 	hints: number;
 	hangmanValue: HangmanValue;
@@ -34,8 +34,8 @@ export const useApp = (): IAppExports => {
 
 	const { toast, closeAll } = useToast();
 	const { isLoaded, getWord } = useFetchWords();
-	const { isWordGuessed, isKeyPressed, splitWord, calculateHints, getHint, addChars, updateHangman } = useGameUtils();
-	const { notStartedToastOptions, keyPressedToastOptions, finishedToastOptions, loseToastOptions, wonToastOptions } = useToastOptions();
+	const { isWordGuessed, isKeyPressed, splitWord, calculateHints, getHint, addChars, updateHangman } = useCore();
+	const { getNotStartedToastOptions, getFinishedToastOptions, getLoseToastOptions, getWonToastOptions, getKeyPressedToastOptions } = useToastOptions();
 
 	const isFinished = useMemo((): boolean => {
 		if (word !== undefined) {
@@ -43,9 +43,9 @@ export const useApp = (): IAppExports => {
 		} else {
 			return false;
 		}
-	}, [hangmanBodyPart.rightArm, chars, isWordGuessed, word]);
+	}, [chars, hangmanBodyPart, isWordGuessed, word]);
 
-	const resetGame = useCallback((): void => {
+	const onResetGame = useCallback((): void => {
 		setWord(undefined);
 		setChars(defaultChars);
 		setHints(defaultHints);
@@ -53,7 +53,17 @@ export const useApp = (): IAppExports => {
 		setHangmanBodyPart(defaultHangmanBodyPart);
 	}, [defaultChars, defaultHangmanBodyPart, defaultHangmanValue, defaultHints]);
 
-	const updateGame = useCallback(
+	const onFinishGame = useCallback((): void => {
+		if (word !== undefined) {
+			if (isWordGuessed(word, chars)) {
+				toast(getWonToastOptions);
+			} else {
+				toast(getLoseToastOptions);
+			}
+		}
+	}, [chars, getLoseToastOptions, getWonToastOptions, isWordGuessed, toast, word]);
+
+	const onUpdateGame = useCallback(
 		(char: string): void => {
 			if (word !== undefined) {
 				if (word.includes(char)) {
@@ -70,39 +80,40 @@ export const useApp = (): IAppExports => {
 				}
 			}
 		},
-		[addChars, hangmanBodyPart, chars, updateHangman, hangmanValue, word]
+		[addChars, chars, hangmanBodyPart, hangmanValue, updateHangman, word]
 	);
-
-	const finishGame = useCallback((): void => {
-		if (word !== undefined) {
-			if (isWordGuessed(word, chars)) {
-				toast(wonToastOptions);
-			} else {
-				toast(loseToastOptions);
-			}
-		}
-	}, [chars, isWordGuessed, loseToastOptions, toast, wonToastOptions, word]);
 
 	const onKeyPress = useCallback(
 		(key: string): void => {
 			if (key !== undefined) {
 				if (!isStarted) {
-					toast(notStartedToastOptions);
+					toast(getNotStartedToastOptions);
 				} else if (isFinished) {
-					toast(finishedToastOptions);
+					toast(getFinishedToastOptions);
 				} else if (isKeyPressed(chars, hangmanValue, key.toUpperCase())) {
-					toast(keyPressedToastOptions(key.toUpperCase()));
+					toast(getKeyPressedToastOptions(key.toUpperCase()));
 				} else {
-					updateGame(key.toUpperCase());
+					onUpdateGame(key.toUpperCase());
 				}
 			}
 		},
-		[chars, finishedToastOptions, hangmanValue, isFinished, isKeyPressed, isStarted, keyPressedToastOptions, notStartedToastOptions, toast, updateGame]
+		[
+			chars,
+			getFinishedToastOptions,
+			getKeyPressedToastOptions,
+			getNotStartedToastOptions,
+			hangmanValue,
+			isFinished,
+			isKeyPressed,
+			isStarted,
+			toast,
+			onUpdateGame,
+		]
 	);
 
 	const onClickStart = (): void => {
 		setIsLoading(true);
-		setTimeout(() => {
+		setTimeout((): void => {
 			setIsLoading(false);
 			setIsStarted(true);
 		}, 300);
@@ -112,7 +123,7 @@ export const useApp = (): IAppExports => {
 		setIsStarted(false);
 		setIsSolved(false);
 		setIsEnded(false);
-		resetGame();
+		onResetGame();
 		closeAll();
 	};
 
@@ -131,9 +142,9 @@ export const useApp = (): IAppExports => {
 		}
 	};
 
-	useEffect(() => {
+	useEffect((): void => {
 		if (isLoaded && word === undefined) {
-			setTimeout(() => {
+			setTimeout((): void => {
 				const text = getWord().toUpperCase();
 				setWord(text);
 				setHints(calculateHints(text));
@@ -141,12 +152,12 @@ export const useApp = (): IAppExports => {
 		}
 	}, [calculateHints, getWord, isLoaded, word]);
 
-	useEffect(() => {
+	useEffect((): void => {
 		if (isFinished && !isEnded) {
 			setIsEnded(true);
-			finishGame();
+			onFinishGame();
 		}
-	}, [finishGame, isEnded, isFinished]);
+	}, [onFinishGame, isEnded, isFinished]);
 
 	useKeyBinding({ onPress: onKeyPress });
 

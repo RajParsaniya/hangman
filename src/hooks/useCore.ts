@@ -12,7 +12,7 @@ interface IUpdateHangmanExports {
 	hangmanBodyPart: HangmanBodyPart;
 }
 
-interface IGameUtilsExports {
+interface ICoreExports {
 	isWordGuessed: (word: string, chars: Array<string>) => boolean;
 	isKeyPressed: (chars: Array<string>, hangmanValue: HangmanValue, key: string) => boolean;
 	splitWord: (word: string) => Array<string>;
@@ -24,7 +24,7 @@ interface IGameUtilsExports {
 	updateHangman: (props: IUpdateHangmanProps) => IUpdateHangmanExports;
 }
 
-export const useGameUtils = (): IGameUtilsExports => {
+export const useCore = (): ICoreExports => {
 	const isWordGuessed = (word: string, chars: Array<string>): boolean => {
 		const pieces: Array<string> = splitWord(word);
 		return pieces.every((char) => chars.includes(char));

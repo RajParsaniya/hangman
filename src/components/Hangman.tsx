@@ -6,7 +6,7 @@ interface IHangmanProps {
 	sx?: object;
 }
 
-export const Hangman = (props: IHangmanProps) => {
+export const Hangman = (props: IHangmanProps): JSX.Element => {
 	return (
 		<Box w="fit-content" h="fit-content" overflow="hidden" sx={props.sx}>
 			<svg className="figure">
