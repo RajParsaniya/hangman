@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useCore, useDefaultValues, useFetchWords, useKeyBinding, useToast, useToastOptions } from ".";
+import { useCore, useDefaultValues, useFetchWords, useKeyBinding, useToast, useToastValue } from ".";
 import { HangmanBodyPart, HangmanValue } from "../type";
 
 interface IAppExports {
@@ -32,10 +32,10 @@ export const useApp = (): IAppExports => {
 	const [isSolved, setIsSolved] = useState<boolean>(false);
 	const [isEnded, setIsEnded] = useState<boolean>(false);
 
-	const { toast, closeAll } = useToast();
+	const { toast, closeAllToast } = useToast();
 	const { isLoaded, getWord } = useFetchWords();
 	const { isWordGuessed, isKeyPressed, splitWord, calculateHints, getHint, addChars, updateHangman } = useCore();
-	const { getNotStartedToastOptions, getFinishedToastOptions, getLoseToastOptions, getWonToastOptions, getKeyPressedToastOptions } = useToastOptions();
+	const { getNotStartedToastOptions, getFinishedToastOptions, getLoseToastOptions, getWonToastOptions, getKeyPressedToastOptions } = useToastValue();
 
 	const isFinished = useMemo((): boolean => {
 		if (word !== undefined) {
@@ -124,7 +124,7 @@ export const useApp = (): IAppExports => {
 		setIsSolved(false);
 		setIsEnded(false);
 		onResetGame();
-		closeAll();
+		closeAllToast();
 	};
 
 	const onClickHint = (): void => {

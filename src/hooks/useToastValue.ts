@@ -2,7 +2,7 @@ import { UseToastOptions } from "@chakra-ui/react";
 import { FINISHED_TOAST, KEY_PRESSED_TOAST, LOSE_TOAST, NOT_STARTED_TOAST, WON_TOAST } from "../constants";
 import { StringUtils } from "../utils";
 
-interface IToastOptionsExports {
+interface IToastValueExports {
 	getNotStartedToastOptions: UseToastOptions;
 	getFinishedToastOptions: UseToastOptions;
 	getLoseToastOptions: UseToastOptions;
@@ -10,7 +10,7 @@ interface IToastOptionsExports {
 	getKeyPressedToastOptions: (key: string) => UseToastOptions;
 }
 
-export const useToastOptions = (): IToastOptionsExports => {
+export const useToastValue = (): IToastValueExports => {
 	const getNotStartedToastOptions: UseToastOptions = {
 		id: "not-started",
 		title: NOT_STARTED_TOAST,

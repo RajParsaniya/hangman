@@ -7,13 +7,13 @@ interface IHangmanValuesProps {
 }
 
 export const HangmanValues = (props: IHangmanValuesProps): JSX.Element => {
-	const centerTagStyle = (hangmanValue: string | undefined): object => {
+	const centerTagStyle = (hangmanValue?: string): object => {
 		return defineStyle({
 			backgroundColor: hangmanValue !== undefined ? "brand.hangman.value" : "transparent",
 		});
 	};
 
-	const spacerTagStyle = (hangmanValue: string | undefined): object => {
+	const spacerTagStyle = (hangmanValue?: string): object => {
 		return defineStyle({
 			backgroundColor: hangmanValue !== undefined ? "brand.secondary.default" : "transparent",
 		});
