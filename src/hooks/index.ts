@@ -6,4 +6,4 @@ export * from "./useDefaultValues";
 export * from "./useFetchWords";
 export * from "./useKeyBinding";
 export * from "./useToast";
-export * from "./useToastOptions";
+export * from "./useToastValue";
