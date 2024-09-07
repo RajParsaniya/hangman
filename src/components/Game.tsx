@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { useMemo } from "react";
-import { useGameUtils } from "../hooks";
+import { useCore } from "../hooks";
 
 interface IGameProps {
 	word: string;
@@ -8,9 +8,9 @@ interface IGameProps {
 	sx?: object;
 }
 
-export const Game = (props: IGameProps) => {
-	const { getChars } = useGameUtils();
-	const characters = useMemo((): Array<string | undefined> => getChars(props.word, props.chars), [getChars, props.chars, props.word]);
+export const Game = (props: IGameProps): JSX.Element => {
+	const { getChars } = useCore();
+	const characters = useMemo((): Array<string | undefined> => getChars(props.word, props.chars), [getChars, props]);
 
 	return (
 		<Box w="full" h="fit-content" sx={props.sx}>

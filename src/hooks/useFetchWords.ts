@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAxiosRequest } from ".";
 import { RANDOM_WORD_API } from "../constants";
 import data from "../data/data.json";
+import { EMethod } from "../enums";
 import { ArrayUtils } from "../utils";
 
 interface IAPIResponse {
@@ -22,21 +23,21 @@ export const useFetchWords = (): IFetchWordsExports => {
 	const onFailure = (): void => setWords(data);
 
 	const { isLoading, forceReload } = useAxiosRequest<IAPIResponse>({
-		method: "GET",
+		method: EMethod.GET,
 		endpoint: RANDOM_WORD_API,
 		onSuccess: onSuccess,
 		onFailure: onFailure,
 	});
 
-	useEffect(() => {
+	useEffect((): void => {
 		if (words?.length === 0 && !isLoading) {
 			forceReload();
 		}
-	}, [forceReload, isLoading, words?.length]);
+	}, [forceReload, isLoading, words]);
 
 	const isLoaded = useMemo((): boolean => {
 		return words.length > 0;
-	}, [words.length]);
+	}, [words]);
 
 	const getWord = useCallback((): string => {
 		return ArrayUtils.random(words);

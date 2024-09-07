@@ -1,4 +1,4 @@
-import { Box, Center, HStack, Spacer, Text } from "@chakra-ui/react";
+import { Box, Center, defineStyle, HStack, Spacer, Text } from "@chakra-ui/react";
 import { HangmanValue } from "../type";
 
 interface IHangmanValuesProps {
@@ -6,17 +6,17 @@ interface IHangmanValuesProps {
 	sx?: object;
 }
 
-export const HangmanValues = (props: IHangmanValuesProps) => {
+export const HangmanValues = (props: IHangmanValuesProps): JSX.Element => {
 	const centerTagStyle = (hangmanValue: string | undefined): object => {
-		return {
+		return defineStyle({
 			backgroundColor: hangmanValue !== undefined ? "brand.hangman.value" : "transparent",
-		};
+		});
 	};
 
 	const spacerTagStyle = (hangmanValue: string | undefined): object => {
-		return {
+		return defineStyle({
 			backgroundColor: hangmanValue !== undefined ? "brand.secondary.default" : "transparent",
-		};
+		});
 	};
 
 	return (

@@ -1,13 +1,15 @@
-export const progressStyles = {
+import { defineStyle } from "@chakra-ui/react";
+
+export const progressStyles: Record<string, object> = {
 	components: {
 		Progress: {
-			baseStyle: {
+			baseStyle: defineStyle({
 				track: {
 					backgroundColor: "transparent",
 				},
-			},
+			}),
 			variants: {
-				score: () => ({
+				score: defineStyle({
 					filledTrack: {
 						backgroundColor: "brand.secondary.default",
 					},
