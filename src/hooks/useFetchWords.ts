@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAxiosRequest } from ".";
-import { DEFAULT_WORD, RANDOM_WORDS } from "../constants";
+import { RANDOM_WORDS_API } from "../constants";
+import data from "../data/data.json";
 import { EMethod } from "../enums";
 import { ArrayUtils } from "../utils";
 
@@ -19,11 +20,11 @@ export const useFetchWords = (): IFetchWordsExports => {
 	const [words, setWords] = useState<Array<string>>([]);
 
 	const onSuccess = (response: IAPIResponse): void => setWords(response.data);
-	const onFailure = (): void => setWords([DEFAULT_WORD]);
+	const onFailure = (): void => setWords(data);
 
 	const { isLoading, forceReload } = useAxiosRequest<IAPIResponse>({
 		method: EMethod.GET,
-		endpoint: RANDOM_WORDS,
+		endpoint: RANDOM_WORDS_API,
 		onSuccess: onSuccess,
 		onFailure: onFailure,
 	});

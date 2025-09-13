@@ -6,6 +6,7 @@ interface IAxiosRequestProps<ResponseType> {
 	method: EMethod;
 	endpoint: string;
 	request?: object;
+	timeout?: number;
 	configOverrides?: object;
 	onSuccess: (response: ResponseType) => void;
 	onFailure?: () => void;
@@ -23,7 +24,13 @@ export const useAxiosRequest = <ResponseType>(props: IAxiosRequestProps<Response
 	useEffect((): void => {
 		if (reload) {
 			setReload(false);
-			axoisConfig({ method: props.method, endpoint: props.endpoint, request: props.request, configOverrides: props.configOverrides })
+			axoisConfig({
+				method: props.method,
+				endpoint: props.endpoint,
+				request: props.request,
+				timeout: props.timeout ?? 2000,
+				configOverrides: props.configOverrides,
+			})
 				.then((response) => {
 					if (props.onSuccess) {
 						props.onSuccess(response as ResponseType);
