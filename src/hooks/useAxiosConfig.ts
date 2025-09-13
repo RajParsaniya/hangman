@@ -6,6 +6,7 @@ interface IAxoisConfigProps {
 	method: EMethod;
 	endpoint: string;
 	request?: object;
+	timeout: number;
 	configOverrides?: object;
 }
 
@@ -21,7 +22,7 @@ export const useAxiosConfig = (): IAxiosConfigExports => {
 		setIsLoading(true);
 		return new Promise((resolve, reject) => {
 			axios
-				.create()
+				.create({ timeout: props.timeout })
 				.request({
 					method: props.method,
 					url: props.endpoint,
